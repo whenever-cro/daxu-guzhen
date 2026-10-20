@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>大圩古镇 · 我的家乡文旅网站</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏯</text></svg>">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<!-- ============ 顶部导航 ============ -->
+<header class="nav" id="nav">
+  <div class="nav-inner">
+    <a class="brand" href="#top">
+      <span class="logo">圩</span>
+      <span class="brand-txt">
+        <strong id="siteName">大圩古镇</strong>
+        <small id="siteSubtitle">广西四大古镇之一</small>
+      </span>
+    </a>
+    <nav class="nav-links">
+      <a href="#cats">分类</a>
+      <a href="#spots">项目</a>
+      <a href="#routes">线路</a>
+      <a href="#media">影音</a>
+      <a href="#stats">洞察</a>
+      <a href="#tips">贴士</a>
+      <a href="#msg">留言</a>
+    </nav>
+    <button class="btn btn-ghost btn-plan" id="btnPlan">
+      🧳 我的行程单 <b id="planCount">0</b>
+    </button>
+  </div>
+</header>
+
+<!-- ============ 首屏 ============ -->
+<section class="hero" id="top">
+  <img class="hero-bg" src="assets/img/hero-daxu.jpg" alt="漓江边的大圩古镇全景">
+  <div class="hero-mask"></div>
+  <div class="hero-inner">
+    <span class="hero-tag">我的家乡 · 桂林市灵川县大圩镇</span>
+    <h2 id="siteSlogan">漓江第一古镇 · 千年圩市烟火</h2>
+    <p id="siteIntro">大圩镇地处桂林市灵川县东南、漓江东岸……</p>
+    <div class="hero-stats">
+      <div class="hs"><b id="stSpots">26</b><span>文旅项目</span></div>
+      <div class="hs"><b id="stFree">19</b><span>免费开放</span></div>
+      <div class="hs"><b id="stCats">6</b><span>主题分类</span></div>
+      <div class="hs"><b id="stRoutes">4</b><span>推荐线路</span></div>
+    </div>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="#spots" id="btnExplore">开始逛家乡 →</a>
+      <a class="btn btn-ghost" href="#media">看宣传片 ▶</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 分类导览 ============ -->
+<section class="block" id="cats">
+  <div class="section-head">
+    <h2>分类导览</h2>
+    <p>六类主题，从古镇街巷到漓江山水，点击即可筛选</p>
+  </div>
+  <div class="cat-grid" id="catGrid"></div>
+</section>
+
+<!-- ============ 文旅项目 ============ -->
+<section class="block" id="spots">
+  <div class="section-head">
+    <h2>文旅项目</h2>
+    <p>共 <b id="spotTotal">26</b> 个项目，支持搜索、排序、收藏与加入行程</p>
+  </div>
+  <div class="toolbar">
+    <input type="text" id="searchInput" placeholder="搜索项目名称 / 标签 / 片区，如：瀑布、米粉、古东">
+    <select id="sortSel">
+      <option value="rating">按评分排序</option>
+      <option value="hot">按人气排序</option>
+      <option value="price">按票价从低到高</option>
+    </select>
+    <button class="btn btn-ghost" id="btnFavFilter">☆ 只看收藏</button>
+  </div>
+  <div class="spot-grid" id="spotGrid"></div>
+  <p class="empty" id="emptyTip" hidden>没有符合条件的项目，换个关键词试试～</p>
+</section>
+
+<!-- ============ 主题线路 ============ -->
+<section class="block" id="routes">
+  <div class="section-head">
+    <h2>主题线路</h2>
+    <p>4 条线路可直接一键载入行程单，再按自己的节奏调整</p>
+  </div>
+  <div class="route-list" id="routeList"></div>
+</section>
+
+<!-- ============ 影音中心 ============ -->
+<section class="block" id="media">
+  <div class="section-head">
+    <h2>影音中心</h2>
+    <p>4 段实拍风格短片，点击右侧列表切换播放</p>
+  </div>
+  <div class="media-wrap">
+    <div class="player" id="playerBox">
+      <video id="playerVideo" muted playsinline controls preload="metadata"></video>
+      <div class="slideshow" id="slideshow" hidden>
+        <div class="slide-cap" id="slideCaption"></div>
+        <div class="slide-bar"><i id="slideBar"></i></div>
+      </div>
+      <span class="player-mode" id="playerMode">视频播放</span>
+    </div>
+    <div class="player-meta">
+      <h3 id="playerTitle">《漓江第一古镇》宣传片</h3>
+      <p id="playerDesc"></p>
+    </div>
+    <div class="video-list" id="videoList"></div>
+  </div>
+</section>
+
+<!-- ============ 数据洞察 ============ -->
+<section class="block" id="stats">
+  <div class="section-head">
+    <h2>数据洞察</h2>
+    <p>全部统计由项目数据实时计算，随筛选内容更新</p>
+  </div>
+  <div class="stat-cards" id="statCards"></div>
+  <div class="chart-grid">
+    <div class="chart-card"><h4>分类项目数</h4><canvas id="chartCat"></canvas></div>
+    <div class="chart-card"><h4>片区分布 TOP8</h4><canvas id="chartDistrict"></canvas></div>
+    <div class="chart-card"><h4>评分排行 TOP8</h4><canvas id="chartRating"></canvas></div>
+    <div class="chart-card"><h4>全年适宜月份分布</h4><canvas id="chartMonth"></canvas></div>
+  </div>
+</section>
+
+<!-- ============ 出行贴士 ============ -->
+<section class="block" id="tips">
+  <div class="section-head">
+    <h2>出行贴士</h2>
+    <p>交通、票务、季节与安全，一次讲清楚</p>
+  </div>
+  <div class="tip-grid" id="tipList"></div>
+</section>
+
+<!-- ============ 留言板 ============ -->
+<section class="block" id="msg">
+  <div class="section-head">
+    <h2>留言板</h2>
+    <p>说说你和大圩的故事，留言保存在本地浏览器</p>
+  </div>
+  <form class="msg-form" id="msgForm">
+    <input type="text" id="msgName" placeholder="你的昵称" maxlength="12">
+    <textarea id="msgText" rows="3" placeholder="最想去大圩的哪个地方？为什么？" maxlength="200"></textarea>
+    <button class="btn btn-primary" type="submit">发布留言</button>
+  </form>
+  <div class="msg-list" id="msgList"></div>
+</section>
+
+<footer>
+  <p>「<span id="footName">大圩古镇</span>」我的家乡文旅主题网站 · 由 CodeBuddy 辅助开发</p>
+  <p class="foot-sub">图片与视频为本项目 AI 生成的示意素材，仅用于课程作业展示</p>
+</footer>
+
+<!-- ============ 行程单抽屉 ============ -->
+<aside class="drawer" id="planDrawer">
+  <div class="drawer-head">
+    <h3>我的行程单</h3>
+    <button class="icon-btn" id="btnClosePlan">✕</button>
+  </div>
+  <div class="drawer-body" id="planList"></div>
+  <div class="drawer-foot">
+    <p id="planSummary">还没有添加项目</p>
+    <div class="drawer-actions">
+      <button class="btn btn-ghost" id="btnClear">清空</button>
+      <button class="btn btn-primary" id="btnExport">导出行程</button>
+    </div>
+  </div>
+</aside>
+<div class="overlay" id="planOverlay"></div>
+
+<!-- ============ 详情弹窗 ============ -->
+<div class="modal" id="detailModal">
+  <div class="modal-card">
+    <button class="icon-btn modal-close" id="btnCloseDetail">✕</button>
+    <div id="detailBody"></div>
+  </div>
+</div>
+<div class="overlay" id="detailOverlay"></div>
+
+<div class="toast" id="toast"></div>
+
+<script src="assets/js/data.js"></script>
+<script src="assets/js/chart.js"></script>
+<script src="assets/js/app.js"></script>
+</body>
+</html>
